@@ -41,13 +41,15 @@ public class xboxcontroller {
 	private volatile XInputButtonsDelta buttons;
 	private volatile XInputAxes axes;
 
+	private Robot r;
+
 	// MousePos
 	private volatile int MouseX;
 	private volatile int MouseY;
 
 	public xboxcontroller() {
 		try {
-			Robot r = new Robot();
+			r = new Robot();
 			device = XInputDevice14.getDeviceFor(0);
 
 			components = device.getComponents();
@@ -61,12 +63,7 @@ public class xboxcontroller {
 			cameraUp = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					Robot r;
 					try {
-						r = new Robot();
-						XInputDevice14 device = XInputDevice14.getDeviceFor(0);
-						XInputComponents components = device.getComponents();
-						XInputAxes axes = components.getAxes();
 						while (true) {
 							device.poll();
 							// Move Camera to the top
@@ -91,12 +88,7 @@ public class xboxcontroller {
 			cameraDown = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					Robot r;
 					try {
-						r = new Robot();
-						XInputDevice14 device = XInputDevice14.getDeviceFor(0);
-						XInputComponents components = device.getComponents();
-						XInputAxes axes = components.getAxes();
 						while (true) {
 							device.poll();
 							// Move Camera to the Bottom
